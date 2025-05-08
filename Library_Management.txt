@@ -276,3 +276,27 @@ INSERT INTO BOOKAUTHOR
 VALUES ('9247381001','W100'); 
 INSERT INTO BOOKAUTHOR 
 VALUES ('2147428890','W105'); 
+
+CREATE TABLE Borrowed_Books
+(id             INTEGER,
+ ISBN           VARCHAR2(10),
+ lib_card_id    INTEGER,
+ date_borrowed  DATE,
+ date_to_return DATE,
+ is_late        VARCHAR2(5),
+ late_fee       NUMBER(5,2),
+ CONSTRAINT borrowed_books_id_pk PRIMARY KEY (id),
+ CONSTRAINT borrowed_books_isbn_fk FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+ CONSTRAINT borrowed_books_lib_card_id_fk FOREIGN KEY (lib_card_id) REFERENCES Borrowers(Customer#));
+
+INSERT INTO Borrowed_Books 
+VALUES (1, '1059831198', 1003, TO_DATE('08-APR-24', 'DD-MON-YY'), TO_DATE('08-MAY-24', 'DD-MON-YY'), 'YES', 25.00);
+
+INSERT INTO Borrowed_Books 
+VALUES (2, '0401140733', 1006, TO_DATE('09-APR-24', 'DD-MON-YY'), TO_DATE('09-MAY-24', 'DD-MON-YY'), 'YES', 25.00);
+
+INSERT INTO Borrowed_Books 
+VALUES (3, '4981341710', 1012, TO_DATE('10-APR-24', 'DD-MON-YY'), TO_DATE('10-MAY-24', 'DD-MON-YY'), 'NO', 0.00);
+
+INSERT INTO Borrowed_Books 
+VALUES (4, '8843172113', 1015, TO_DATE('11-APR-24', 'DD-MON-YY'), TO_DATE('11-MAY-24', 'DD-MON-YY'), 'NO', 0.00);
