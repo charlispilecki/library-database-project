@@ -300,3 +300,46 @@ VALUES (3, '4981341710', 1012, TO_DATE('10-APR-24', 'DD-MON-YY'), TO_DATE('10-MA
 
 INSERT INTO Borrowed_Books 
 VALUES (4, '8843172113', 1015, TO_DATE('11-APR-24', 'DD-MON-YY'), TO_DATE('11-MAY-24', 'DD-MON-YY'), 'NO', 0.00);
+
+
+CREATE TABLE Role_Privilege (
+  role_privilege_id NUMBER GENERATED ALWAYS AS IDENTITY,
+  role_name VARCHAR2(30),
+  privilege_name VARCHAR2(30),
+  CONSTRAINT role_privilege_pk PRIMARY KEY (role_privilege_id),
+  CONSTRAINT role_privilege_role_fk FOREIGN KEY (role_name) REFERENCES Roles(role_name),
+  CONSTRAINT role_privilege_privilege_fk FOREIGN KEY (privilege_name, role_name) REFERENCES Privileges(privilege_name, role_name)
+);
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'ADD_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'DELETE_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'EDIT_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'VIEW_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'ADD_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'DELETE_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'EDIT_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'VIEW_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'CHECK_OUT_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Librarian', 'CHECK_IN_BOOKS');
+
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'EDIT_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'VIEW_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'EDIT_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'VIEW_BORROWER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'CHECK_OUT_BOOKS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('Lib_Intern', 'CHECK_IN_BOOKS');
+
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'ADD_USER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'DELETE_USER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'EDIT_USER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'VIEW_USER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'GRANT_PERMISSIONS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'REVOKE_PERMISSIONS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'VIEW_PERMISSIONS');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'ADD_ROLE');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'DELETE_ROLE');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'EDIT_ROLE');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_Admin', 'VIEW_ROLE');
+
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_User', 'VIEW_USER');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_User', 'VIEW_ROLE');
+INSERT INTO Role_Privilege (role_name, privilege_name) VALUES ('System_User', 'VIEW_PERMISSIONS');
